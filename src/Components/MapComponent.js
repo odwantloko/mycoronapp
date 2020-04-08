@@ -6,8 +6,8 @@ const AnyReactComponent = ({ text }) => <div>{text}</div>;
 class SimpleMap extends Component {
   static defaultProps = {
     center: {
-      lat: 59.95,
-      lng: 30.33
+      lat: -26.19,
+      lng: 28.03
     },
     zoom: 11
   };
@@ -17,13 +17,13 @@ class SimpleMap extends Component {
       // Important! Always set the container height explicitly
       <div style={{ height: '100vh', width: '100%' }}>
         <GoogleMapReact
-          bootstrapURLKeys={{ key: /* YOUR KEY HERE */ }}
+          bootstrapURLKeys={{ key: "AIzaSyDoATwXhVPVR-k3VQCzhac4QZmXkYxfxRI" }}
           defaultCenter={this.props.center}
           defaultZoom={this.props.zoom}
         >
           <AnyReactComponent
-            lat={59.955413}
-            lng={30.337844}
+            lat={	-26.195246}
+            lng={	28.034088}
             text="My Marker"
           />
         </GoogleMapReact>
