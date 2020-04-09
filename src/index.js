@@ -6,7 +6,8 @@ import HamburgerMenu from 'react-hamburger-menu'
 import MenuContent from './menuContent' 
 import SimpleMap from './Components/MapComponent';
 import './index.css'
-
+import { BrowserRouter as Router, Switch, Route,Link } from "react-router-dom";
+import CoronaTable from './Components/TableComponent';
 
 
 const contentStyles = {
@@ -33,29 +34,44 @@ class App extends Component {
 
   render() {
     return <div>
-      <CheeseburgerMenu
-        isOpen={this.state.menuOpen}
-        closeCallback={this.closeMenu.bind(this)}>
-        <MenuContent closeCallback={this.closeMenu.bind(this)}/>
-      </CheeseburgerMenu>
-      
-      <HamburgerMenu
-        isOpen={this.state.menuOpen}
-        menuClicked={this.openMenu.bind(this)}
-        width={35}
-        height={25}
-        strokeWidth={3}
-        rotate={0}
-        color='black'
-        borderRadius={0}
-        animationDuration={0.5}
-      />
-      <div className="App">
-        <h1> The Rona Visualizer</h1>
-      </div>
-      <div>
-         <SimpleMap/>
-      </div>
+      <Router>
+        <CheeseburgerMenu
+          isOpen={this.state.menuOpen}
+          closeCallback={this.closeMenu.bind(this)}>
+          <MenuContent closeCallback={this.closeMenu.bind(this)}/>
+        </CheeseburgerMenu>
+        
+        <HamburgerMenu
+          isOpen={this.state.menuOpen}
+          menuClicked={this.openMenu.bind(this)}
+          width={35}
+          height={25}
+          strokeWidth={3}
+          rotate={0}
+          color='black'
+          borderRadius={0}
+          animationDuration={0.5}
+        />
+        <div className="App">
+          <h1> The Rona Visualizer</h1>
+        </div>
+        <div>
+          <SimpleMap/>
+        </div>
+
+      <Switch>
+          <Route path="/Corona-Map">
+            <SimpleMap />
+          </Route>
+          <Route path="/Corona-Table">
+            <CoronaTable/>
+          </Route>
+          <Route path="/">
+            <SimpleMap />
+          </Route>
+        </Switch>
+      </Router>
+     
       
     </div>
   }

@@ -1,10 +1,9 @@
 import React, { Component } from 'react'
-import { BrowserRouter as Router, Switch,
-    Route,
-    Link
-  } from "react-router-dom";
-
+import { BrowserRouter as Router, Switch, Route,Link } from "react-router-dom";
+import {App } from './index'
 import './menuContent.css'
+import SimpleMap from './Components/MapComponent';
+import CoronaTable from './Components/TableComponent';
 
 class MenuContent extends Component {
   constructor(props) {
@@ -17,17 +16,19 @@ class MenuContent extends Component {
 
   render() {
     return (
+    <Router>
       <div className="menu">
-        {this.items.map(i => <div className="menu-item" key={i}>
-          <a
-            href="https://github.com/Middlerun/cheeseburger-menu"
-            onClick={this.props.closeCallback}
-            target="_blank">
-            {i}
-          </a>
-        </div>)}
-
-      </div>
+          <div className="menu-item">
+            <Link to="/Corona-Map"> Global Stats Map</Link>
+           
+          </div>
+          <div className="menu-item">
+            <Link to="/Corona-Table"> Global Stats Table</Link>
+          </div>
+       
+        </div>
+    
+    </Router>
     )
   }
 }
