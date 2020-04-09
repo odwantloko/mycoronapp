@@ -41,17 +41,15 @@ export class CoronaTable extends Component {
     postOptions.method = 'GET';
     
     postOptions.headers = {};
-    postOptions.headers['Content-type'] = 'application/json';
-    postOptions.headers['x-rapidapi-host'] = 'covid-19-coronavirus-statistics.p.rapidapi.com'
-    postOptions.headers['x-rapidapi-key']= '214b6319a2msha579c94776b2a4ap1ae033jsne704830506f0'
+  
    
 		
-    fetch('https://covid-19-coronavirus-statistics.p.rapidapi.com/v1/stats', postOptions)
+    fetch('https://api.covid19api.com/summary', postOptions)
         .then(res => res.json())
         .then((data) => {
 
-		this.setState({data:data.data.covid19Stats})
-		console.log(data.data.covid19Stats)   
+		this.setState({data:data.Countries})
+		console.log(data.Global)   
 
 
     }).catch(console.log)

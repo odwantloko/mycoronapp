@@ -1,0 +1,71 @@
+import React, { Component } from 'react';
+import SimpleMap from './MapComponent';
+
+
+class Vizualizer extends Component {
+  
+  constructor(props){
+		super(props);
+	
+		this.state = { 
+			data: {}
+		}
+  }
+  
+  componentDidMount = () => {
+
+
+    let postOptions = {};
+    
+    postOptions.method = 'GET';
+    
+    postOptions.headers = {};
+    postOptions.headers['Content-type'] = 'application/json';
+   
+		
+    fetch('https://api.covid19api.com/live/country/south-africa/status/confirmed', postOptions)
+        .then(res => res.json())
+        .then((data) => {
+    
+		this.setState({data:data[data.length-1]})
+		console.log(data[data.length-1])
+
+
+    }).catch(console.log)
+  
+   
+  
+  }
+
+
+  static defaultProps = {
+    center: {
+      lat: -29.087217,
+      lng: 26.154898
+    },
+    zoom: 6.2
+  };
+
+  
+ 
+  render() {
+    return (
+      <div>
+        
+        <div className="App">
+        <h2> Country  - <b> {this.state.data.Country} </b></h2>
+          <h2> Confirmed Cases : <b> {this.state.data.Confirmed} </b> Active Cases : <b>{this.state.data.Active}</b> Recovered Cases : <b>{this.state.data.Recovered } </b> Deaths : <b> {this.state.data.Deaths}</b></h2> 
+        </div>
+
+        <div style={{ height: '95vh', width: '100%' }}>
+        <SimpleMap/>
+      </div>
+
+      </div>
+    
+    );
+  }
+}
+ 
+export default Vizualizer;
+

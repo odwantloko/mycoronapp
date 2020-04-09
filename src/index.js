@@ -8,6 +8,7 @@ import SimpleMap from './Components/MapComponent';
 import './index.css'
 import { BrowserRouter as Router, Switch, Route,Link } from "react-router-dom";
 import CoronaTable from './Components/TableComponent';
+import Vizualizer from './Components/VisualizerComponent'
 
 
 const contentStyles = {
@@ -60,7 +61,7 @@ class App extends Component {
           <div className="App">
             <h1> The Rona Visualizer</h1>
           </div>
-            <SimpleMap />
+            <Vizualizer />
           </Route>
           <Route path="/Corona-Table">
             <div className="App">
@@ -69,7 +70,7 @@ class App extends Component {
             <CoronaTable/>
           </Route>
           <Route path="/">
-            <SimpleMap />
+            <Vizualizer />
           </Route>
         </Switch>
       </Router>
