@@ -52,18 +52,20 @@ class App extends Component {
           borderRadius={0}
           animationDuration={0.5}
         />
-        <div className="App">
-          <h1> The Rona Visualizer</h1>
-        </div>
-        <div>
-          <SimpleMap/>
-        </div>
+     
+      
 
       <Switch>
           <Route path="/Corona-Map">
+          <div className="App">
+            <h1> The Rona Visualizer</h1>
+          </div>
             <SimpleMap />
           </Route>
           <Route path="/Corona-Table">
+            <div className="App">
+              <h1> The Rona Table</h1>
+            </div>
             <CoronaTable/>
           </Route>
           <Route path="/">

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { BrowserRouter as Router, Switch, Route,Link } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route,Link, BrowserRouter } from "react-router-dom";
 import {App } from './index'
 import './menuContent.css'
 import SimpleMap from './Components/MapComponent';
@@ -16,19 +16,19 @@ class MenuContent extends Component {
 
   render() {
     return (
-    <Router>
-      <div className="menu">
-          <div className="menu-item">
-            <Link to="/Corona-Map"> Global Stats Map</Link>
-           
-          </div>
-          <div className="menu-item">
-            <Link to="/Corona-Table"> Global Stats Table</Link>
-          </div>
-       
+    <BrowserRouter forceRefresh={true}>
+        <div className="menu">
+            <div className="menu-item">
+                <Link to="/Corona-Map"> Global Stats Map</Link>
+            
+            </div>
+            <div className="menu-item">
+                <Link to="/Corona-Table"> Global Stats Table</Link>
+            </div>
+        
         </div>
     
-    </Router>
+    </BrowserRouter>
     )
   }
 }
