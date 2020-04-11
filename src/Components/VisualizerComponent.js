@@ -8,7 +8,7 @@ class Vizualizer extends Component {
 		super(props);
 	
 		this.state = { 
-			data: {}
+			data: {}, global_data : {}
 		}
   }
   
@@ -26,12 +26,21 @@ class Vizualizer extends Component {
     fetch('https://api.covid19api.com/live/country/south-africa/status/confirmed', postOptions)
         .then(res => res.json())
         .then((data) => {
-    
 		this.setState({data:data[data.length-1]})
 		console.log(data[data.length-1])
 
 
     }).catch(console.log)
+
+    // Global Stats API Call
+    fetch('https://api.covid19api.com/summary', postOptions)
+        .then(res => res.json())
+        .then((data) => {
+        this.setState({global_data:data.Global})
+        console.log(data.Global)   
+
+
+        }).catch(console.log)
   
    
   
@@ -61,6 +70,8 @@ class Vizualizer extends Component {
         <SimpleMap/>
       </div>
 
+            <h2> Global Stats </h2>
+          <h2> Total Confirmed Cases : <b> {this.state.global_data.TotalConfirmed}</b>  Total Recovered Cases : <b>{this.state.global_data.TotalRecovered } </b> Total Deaths : <b> {this.state.global_data.TotalDeaths}</b></h2> 
       </div>
     
     );
