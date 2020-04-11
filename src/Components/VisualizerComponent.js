@@ -22,7 +22,7 @@ class Vizualizer extends Component {
     postOptions.headers = {};
     postOptions.headers['Content-type'] = 'application/json';
    
-		
+	// Api Call for local stats
     fetch('https://api.covid19api.com/live/country/south-africa/status/confirmed', postOptions)
         .then(res => res.json())
         .then((data) => {
