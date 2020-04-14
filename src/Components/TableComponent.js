@@ -17,6 +17,7 @@
 */
 
 import React, { Component } from "react";
+import GlobalTableStyles from "../StyleComponents/GlobalTableStyles";
 
 
 export class CoronaTable extends Component {
@@ -42,18 +43,21 @@ export class CoronaTable extends Component {
     
     postOptions.headers = {};
   
-   
+	let values = [{}];
 		
     fetch('https://api.covid19api.com/summary', postOptions)
         .then(res => res.json())
         .then((data) => {
 
-		this.setState({data:data.Countries})
-		console.log(data.Global)   
+		values = data.Countries
+		values.forEach(function(item){ delete item.Slug; delete item.CountryCode; delete item.NewConfirmed; delete item.NewDeaths; delete item.NewRecovered });
+		this.setState({data: values})
+		console.log(values)   
 
 
     }).catch(console.log)
-  
+	
+	
    
   
   }
@@ -79,7 +83,7 @@ export class CoronaTable extends Component {
     
 	render() {
 		return (
-				
+			<GlobalTableStyles>
 				<table>
 					<thead>
 						<tr>{this.getHeader()}</tr>
@@ -88,13 +92,10 @@ export class CoronaTable extends Component {
 						{this.getRowsData()}
 					</tbody>
                 </table>
-                // <text>
-                //     holder
-                // </text>
-		
-			
+			</GlobalTableStyles>
+
 		);
-}
+	}
 }
 
 
