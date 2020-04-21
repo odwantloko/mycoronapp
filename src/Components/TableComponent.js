@@ -50,25 +50,31 @@ export class CoronaTable extends Component {
         .then((data) => {
 
 		values = data.Countries
-		values.forEach(function(item){ delete item.Slug; delete item.CountryCode; delete item.NewConfirmed; delete item.NewDeaths; delete item.NewRecovered });
+		values.forEach(function(item){ 
+			delete item.Slug; 
+			delete item.CountryCode; 
+			delete item.NewConfirmed; 
+			delete item.NewDeaths; 
+			delete item.NewRecovered; 
+			item.Date =new Date(item.Date).toLocaleString(); 
+		});
+		values.sort( (a,b) => b.TotalConfirmed - a.TotalConfirmed);
 		this.setState({data: values})
-		console.log(values)   
 
 
     }).catch(console.log)
-	
-	
-   
   
   }
 
 	getKeys = () =>{
-			return Object.keys(this.state.data[0]);
+		return Object.keys(this.state.data[0]);
 	}
 
 	getHeader = () =>{
 		let keys = this.getKeys();
-		return keys.map((key, index)=>{
+		let Header = ['Highest','Country','Total Confirmed','Total Deaths', 'Total Recoveries','Last Updated']
+		
+		return Header.map((key, index)=>{
 			return <th key={key}>{key.toUpperCase()}</th>
 		})
 	}
@@ -77,13 +83,14 @@ export class CoronaTable extends Component {
 		let items = this.state.data;
 		let keys = this.getKeys();
 		return items.map((row, index)=>{
-			return <tr key={index}><RenderRow key={index} data={row} keys={keys}/></tr>
+		return <tr key={index}><td style ={defaultRow}>{index + 1}</td><RenderRow key={index} data={row} keys={keys}/></tr>
 		})
 	}
     
 	render() {
 		return (
 			<GlobalTableStyles>
+				 <h1> The Rona Table</h1>
 				<table>
 					<thead>
 						<tr>{this.getHeader()}</tr>
@@ -101,8 +108,48 @@ export class CoronaTable extends Component {
 
 const RenderRow = (props) =>{
   return props.keys.map((key, index)=>{
-    return <td key={props.data[key]}>{props.data[key]}</td>
+	
+	if (index == 1 ){
+		return <td key={props.data[key]} style ={confirmedRow}>{props.data[key]}</td>	
+	
+	} 
+	
+	else if (index == 2){
+		return <td key={props.data[key]} style ={deathRow}>{props.data[key]}</td>	
+
+	} 
+
+	else if(index == 3){
+		return <td key={props.data[key]} style ={recoveredRow}>{props.data[key]}</td>	
+
+	}
+	
+	else{
+		return <td key={props.data[key]} style ={defaultRow}>{props.data[key]}</td>
+	}
+   
   })
 }
+
+const defaultRow = {
+	color: '#fff',
+	background: '#a9a9a9'
+};
+
+const deathRow = {
+	color: '#fff',
+	background: '#ff5454'
+};
+
+const confirmedRow = {
+	color: '#fff',
+	background: '#ffd154'
+};
+
+const recoveredRow = {
+	color: '#fff',
+	background: '#76ff54'
+};
+
 
 export default CoronaTable;
