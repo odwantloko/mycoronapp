@@ -3,12 +3,12 @@ import SimpleMap from './MapComponent';
 import VisualizerStyles from '../StyleComponents/VisualizerStyles';
 
 
-class Visualizer extends Component {
+class Home extends Component {
   
   constructor(props){
-		super(props);
-	
-		this.state = { 
+    super(props);
+
+    this.state = { 
       data: {}, 
       global_data : {},
       center : {
@@ -84,5 +84,5 @@ const recovered= {
 	color: '#76ff54'
 };
  
-export default Visualizer;
+export default Home;
 
