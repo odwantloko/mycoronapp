@@ -4,17 +4,17 @@ import { render } from 'react-dom'
 import CheeseburgerMenu from 'cheeseburger-menu'
 import HamburgerMenu from 'react-hamburger-menu'
 import MenuContent from './menuContent' 
-import SimpleMap from './Components/MapComponent';
 import './index.css'
-import { BrowserRouter as Router, Switch, Route,Link } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import CoronaTable from './Components/TableComponent';
 import Vizualizer from './Components/VisualizerComponent'
+import Home from './Components/HomeComponent'
 
 
-const contentStyles = {
-  fontFamily: 'sans-serif',
-  textAlign: 'center',
-}
+// const contentStyles = {
+//   fontFamily: 'sans-serif',
+//   textAlign: 'center',
+// }
 
 class App extends Component {
   constructor(props) {
@@ -53,20 +53,12 @@ class App extends Component {
           borderRadius={0}
           animationDuration={0.5}
         />
-     
-      
 
       <Switch>
           <Route path="/Corona-Map">
-          <div className="App">
-            <h1> The Rona Visualizer</h1>
-          </div>
-            <Vizualizer />
+            <Home />
           </Route>
           <Route path="/Corona-Table">
-            <div className="App">
-              <h1> The Rona Table</h1>
-            </div>
             <CoronaTable/>
           </Route>
           <Route path="/">
@@ -74,8 +66,6 @@ class App extends Component {
           </Route>
         </Switch>
       </Router>
-     
-      
     </div>
   }
 }
