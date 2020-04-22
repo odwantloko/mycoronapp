@@ -24,11 +24,9 @@ export class CoronaTable extends Component {
 
 	constructor(props){
 		super(props);
-		// this.getHeader = this.getHeader.bind(this);
-		// this.getRowsData = this.getRowsData.bind(this);
-		// this.getKeys = this.getKeys.bind(this);
 		this.state = { 
-			data: [{}]
+			data: [{}],
+			CountryCodes: null
 		}
 	}
 
@@ -44,10 +42,12 @@ export class CoronaTable extends Component {
     postOptions.headers = {};
   
 	let values = [{}];
+	let countries = [];
 		
     fetch('https://api.covid19api.com/summary', postOptions)
         .then(res => res.json())
         .then((data) => {
+		console.log(data.Countries[0].CountryCode)
 
 		values = data.Countries
 		values.forEach(function(item){ 
@@ -60,8 +60,7 @@ export class CoronaTable extends Component {
 		});
 		values.sort( (a,b) => b.TotalConfirmed - a.TotalConfirmed);
 		this.setState({data: values})
-
-
+		
     }).catch(console.log)
   
   }
@@ -71,7 +70,6 @@ export class CoronaTable extends Component {
 	}
 
 	getHeader = () =>{
-		let keys = this.getKeys();
 		let Header = ['Highest','Country','Total Confirmed','Total Deaths', 'Total Recoveries','Last Updated']
 		
 		return Header.map((key, index)=>{
@@ -109,17 +107,17 @@ export class CoronaTable extends Component {
 const RenderRow = (props) =>{
   return props.keys.map((key, index)=>{
 	
-	if (index == 1 ){
+	if (index === 1 ){
 		return <td key={props.data[key]} style ={confirmedRow}>{props.data[key]}</td>	
 	
 	} 
 	
-	else if (index == 2){
+	else if (index === 2){
 		return <td key={props.data[key]} style ={deathRow}>{props.data[key]}</td>	
 
 	} 
 
-	else if(index == 3){
+	else if(index === 3){
 		return <td key={props.data[key]} style ={recoveredRow}>{props.data[key]}</td>	
 
 	}
