@@ -88,7 +88,7 @@ export class CoronaTable extends Component {
 	render() {
 		return (
 			<GlobalTableStyles>
-				 <h1> The Rona Table</h1>
+				 <h1> Global Stats</h1>
 				<table>
 					<thead>
 						<tr>{this.getHeader()}</tr>
