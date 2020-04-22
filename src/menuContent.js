@@ -10,8 +10,9 @@ class MenuContent extends Component {
     super(props)
 
     this.items = []
-    this.items.push("Global Stats Map");
-    this.items.push("Global Stats Table")
+    this.items.push("Country Stats Map");
+    this.items.push("Africa Stats Table");
+    this.items.push("Global Stats Table");
   }
 
   render() {
@@ -19,13 +20,14 @@ class MenuContent extends Component {
     <BrowserRouter forceRefresh={true}>
         <div className="menu">
             <div className="menu-item">
-                <Link to="/Corona-Map"> Global Stats Map</Link>
-            
+                <Link to="/Corona-Map"> Country Stats Map</Link>
+            </div>
+            <div className="menu-item">
+                <Link to="/Corona-Africa"> Africa Stats Table</Link>
             </div>
             <div className="menu-item">
                 <Link to="/Corona-Table"> Global Stats Table</Link>
-            </div>
-        
+            </div>       
         </div>
     
     </BrowserRouter>

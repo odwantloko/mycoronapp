@@ -7,8 +7,8 @@ import MenuContent from './menuContent'
 import './index.css'
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import CoronaTable from './Components/TableComponent';
-import Vizualizer from './Components/VisualizerComponent'
 import Home from './Components/HomeComponent'
+import AfricaTable from './Components/AfricaComponent'
 
 
 // const contentStyles = {
@@ -61,8 +61,11 @@ class App extends Component {
           <Route path="/Corona-Table">
             <CoronaTable/>
           </Route>
+          <Route path="/Corona-Africa">
+            <AfricaTable/>
+          </Route>
           <Route path="/">
-            <Vizualizer />
+            <Home />
           </Route>
         </Switch>
       </Router>
