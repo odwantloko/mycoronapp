@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import SimpleMap from './MapComponent';
 import VisualizerStyles from '../StyleComponents/VisualizerStyles';
+import Visualizer from './VisualizerComponent';
 
 
 class Home extends Component {
@@ -53,36 +54,27 @@ class Home extends Component {
  
   render() {
     return (
-      <VisualizerStyles>
-        <h1> The Rona Visualizer</h1>
-        <h2> Country  - <b> {this.state.data.Country} </b></h2>
-          <h2> Confirmed Cases : <b style = {confirmed}> {this.state.data.Confirmed} </b> Active Cases : <b>{this.state.data.Active}</b> Recovered Cases : <b  style = {recovered}>{this.state.data.Recovered } </b> Deaths : <b  style = {death}> {this.state.data.Deaths}</b></h2> 
-
-          <div style={{ height: '50%', width: '100%' }}>
-          <SimpleMap center = { this.state.center}
-            zoom = {this.state.zoom}
-            />
-          </div>
-
-          <h2> Global Stats </h2>
-          <h2> Total Confirmed Cases : <b  style = {confirmed}> {this.state.global_data.TotalConfirmed}</b>  Total Recovered Cases : <b style = {recovered}>{this.state.global_data.TotalRecovered } </b> Total Deaths : <b  style = {death}> {this.state.global_data.TotalDeaths}</b></h2> 
-    </VisualizerStyles>
-
+    <div>
+      {typeof this.state.data.Country !='undefined' ? 
+        <Visualizer
+          country = {this.state.data.Country}
+          active = {this.state.data.Active}
+          confirmed = {this.state.data.Confirmed}
+          recovered = {this.state.data.Recovered}
+          deaths = {this.state.data.Deaths}
+          center = { this.state.center}
+          zoom = {this.state.zoom}
+          global_deaths = {this.state.global_data.TotalDeaths}
+          global_confirmed = {this.state.global_data.TotalConfirmed}
+          global_recovered = {this.state.global_data.TotalRecovered}
+        />: <div> loading .. </div>}
+    </div>
+     
+       
+      
     );
   }
 }
 
-const death = {
-	color: '#ff5454'
-};
-
-const confirmed = {
-	color: '#ffd154'
-};
-
-const recovered= {
-	color: '#76ff54'
-};
- 
 export default Home;
 
