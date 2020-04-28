@@ -2,6 +2,9 @@ import styled from 'styled-components';
 import breakpoint from 'styled-components-breakpoint';
 
 const GlobalTableStyles = styled.div`
+    table{
+        width: 100%;
+    }
     th {
         border-bottom-width: 1px;
         font-size: 15px;
@@ -14,7 +17,9 @@ const GlobalTableStyles = styled.div`
 
 
   ${breakpoint('tablet')`
-
+    table{
+        width: 100%;
+    }
     th {
         border-bottom-width: 1px;
         font-size: 25px;

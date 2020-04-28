@@ -29,7 +29,7 @@ export class AfricaTable extends Component {
     fetch('https://api.covid19api.com/summary', postOptions)
         .then(res => res.json())
         .then((data) => {
-		console.log(data.Countries[0].CountryCode)
+
 
         values = data.Countries;
         var african_stats= [];
