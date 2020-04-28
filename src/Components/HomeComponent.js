@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import SimpleMap from './MapComponent';
 import VisualizerStyles from '../StyleComponents/VisualizerStyles';
 import Visualizer from './VisualizerComponent';
+import firebase from './../firebase.js'
 
 
 class Home extends Component {
@@ -16,7 +17,8 @@ class Home extends Component {
         lat: -29.087217,
         lng: 26.154898
       }, 
-      zoom: 6.2
+      zoom: 6.2,
+      testData: {}
 		}
   }
   
@@ -48,7 +50,30 @@ class Home extends Component {
         console.log(data.Global)   
         }).catch(console.log)
 
-  
+    
+      
+      const itemsRef = firebase.database().ref('TestData');
+      itemsRef.on('value', (snapshot) => {
+        let items = snapshot.val();
+        console.log(items)
+        let data = items[Object.keys(items)[Object.keys(items).length - 1]]
+        console.log(data)
+        this.setState({
+            testData: data
+          });
+        // for (let item in items) {
+        //   newState.push({
+        //     id: item,
+        //     title: items[item].title,
+        //     user: items[item].user
+        //   });
+        // }
+        // this.setState({
+        //   testData: newState
+        // });
+      });
+
+
   }
   
  
@@ -58,6 +83,7 @@ class Home extends Component {
       {typeof this.state.data.Country !='undefined' ? 
         <Visualizer
           country = {this.state.data.Country}
+          tests = {this.state.testData.TestsConducted}
           active = {this.state.data.Active}
           confirmed = {this.state.data.Confirmed}
           recovered = {this.state.data.Recovered}

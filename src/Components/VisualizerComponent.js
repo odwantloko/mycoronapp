@@ -8,7 +8,7 @@ class Visualizer extends Component {
     return (
       <VisualizerStyles>
         <h1> The Rona Visualizer</h1>
-        <h2> Country  - <b> {this.props.country} </b></h2>
+    <h2> Country  - <b> {this.props.country} </b> Tests Conducted: <b> {this.props.tests}</b></h2>
           <h2> Confirmed Cases : <b style = {confirmed}> {this.props.confirmed} </b> Active Cases : <b>{this.props.active}</b> Recovered Cases : <b  style = {recovered}>{this.props.recovered } </b> Deaths : <b  style = {death}> {this.props.deaths}</b></h2> 
 
           <div style={{ height: '50%', width: '100%' }}>
