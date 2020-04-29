@@ -1,21 +1,3 @@
-/*!
-
-=========================================================
-* Light Bootstrap Dashboard React - v1.3.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/light-bootstrap-dashboard-react
-* Copyright 2019 Creative Tim (https://www.creative-tim.com)
-* Licensed under MIT (https://github.com/creativetimofficial/light-bootstrap-dashboard-react/blob/master/LICENSE.md)
-
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
-
 import React, { Component } from "react";
 import GlobalTableStyles from "../StyleComponents/GlobalTableStyles";
 
@@ -25,24 +7,19 @@ export class CoronaTable extends Component {
 	constructor(props){
 		super(props);
 		this.state = { 
-			data: [{}],
-			CountryCodes: null
+			data: [{}]		
 		}
 	}
 
  
 
   componentDidMount = () => {
-
-
     let postOptions = {};
-    
     postOptions.method = 'GET';
-    
     postOptions.headers = {};
   
 	let values = [{}];
-	let countries = [];
+	let arr = [];
 		
     fetch('https://api.covid19api.com/summary', postOptions)
         .then(res => res.json())
@@ -50,16 +27,42 @@ export class CoronaTable extends Component {
 		console.log(data.Countries[0].CountryCode)
 
 		values = data.Countries
-		values.forEach(function(item){ 
-			delete item.Slug; 
-			delete item.CountryCode; 
-			delete item.NewConfirmed; 
-			delete item.NewDeaths; 
-			delete item.NewRecovered; 
-			item.Date =new Date(item.Date).toLocaleString(); 
-		});
+		
+		// Sort by highest cases
 		values.sort( (a,b) => b.TotalConfirmed - a.TotalConfirmed);
-		this.setState({data: values})
+		
+		
+		for (let i=0; i < values.length; i++){
+			let obj ={};
+			let DeathRatio = (values[i].TotalDeaths/values[i].TotalConfirmed * 100).toFixed(2);
+			let RecoveryRatio = (values[i].TotalRecovered/values[i].TotalConfirmed * 100).toFixed(2);
+
+			console.log(typeof ratio)
+			if(RecoveryRatio !="NaN"){
+				obj.Country = values[i].Country;
+				obj.TotalConfirmed = values[i].TotalConfirmed;
+				obj.TotalDeaths = values[i].TotalDeaths;
+				obj.DeathRatio = DeathRatio + "%";
+				obj.TotalRecovered = values[i].TotalRecovered;
+				obj.RecoveryRatio = RecoveryRatio +"%";
+				obj.Date = new Date(values[i].Date).toLocaleString();
+			
+				
+			}else{
+				obj.Country = values[i].Country;
+				obj.TotalConfirmed = values[i].TotalConfirmed;
+				obj.TotalDeaths = values[i].TotalDeaths;
+				obj.DeathRatio = "0.00%";
+				obj.TotalRecovered = values[i].TotalRecovered;
+				obj.RecoveryRatio ="0.00%";
+				obj.Date = new Date(values[i].Date).toLocaleString();
+			}
+
+
+			
+			arr.push(obj)
+		}
+		this.setState({data: arr})
 		
     }).catch(console.log)
   
@@ -70,7 +73,7 @@ export class CoronaTable extends Component {
 	}
 
 	getHeader = () =>{
-		let Header = ['Highest','Country','Total Confirmed','Total Deaths', 'Total Recoveries','Last Updated']
+		let Header = ['Highest','Country','Total Confirmed','Total Deaths', '','Total Recoveries','','Last Updated']
 		
 		return Header.map((key, index)=>{
 			return <th key={key}>{key.toUpperCase()}</th>
@@ -112,12 +115,12 @@ const RenderRow = (props) =>{
 	
 	} 
 	
-	else if (index === 2){
+	else if (index === 2 || index === 3){
 		return <td key={props.data[key]} style ={deathRow}>{props.data[key]}</td>	
 
 	} 
 
-	else if(index === 3){
+	else if(index === 4 || index === 5){
 		return <td key={props.data[key]} style ={recoveredRow}>{props.data[key]}</td>	
 
 	}
