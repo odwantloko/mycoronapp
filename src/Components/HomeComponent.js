@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import SimpleMap from './MapComponent';
-import VisualizerStyles from '../StyleComponents/VisualizerStyles';
 import Visualizer from './VisualizerComponent';
 import firebase from './../firebase.js'
 
@@ -61,16 +59,6 @@ class Home extends Component {
         this.setState({
             testData: data
           });
-        // for (let item in items) {
-        //   newState.push({
-        //     id: item,
-        //     title: items[item].title,
-        //     user: items[item].user
-        //   });
-        // }
-        // this.setState({
-        //   testData: newState
-        // });
       });
 
 

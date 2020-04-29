@@ -1,9 +1,6 @@
 import React, { Component } from 'react'
 import { BrowserRouter as Router, Switch, Route,Link, BrowserRouter } from "react-router-dom";
-import {App } from './index'
 import './menuContent.css'
-import SimpleMap from './Components/MapComponent';
-import CoronaTable from './Components/TableComponent';
 
 class MenuContent extends Component {
   constructor(props) {

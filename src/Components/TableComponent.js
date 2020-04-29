@@ -37,8 +37,7 @@ export class CoronaTable extends Component {
 			let DeathRatio = (values[i].TotalDeaths/values[i].TotalConfirmed * 100).toFixed(2);
 			let RecoveryRatio = (values[i].TotalRecovered/values[i].TotalConfirmed * 100).toFixed(2);
 
-			console.log(typeof ratio)
-			if(RecoveryRatio !="NaN"){
+			if(RecoveryRatio !=="NaN"){
 				obj.Country = values[i].Country;
 				obj.TotalConfirmed = values[i].TotalConfirmed;
 				obj.TotalDeaths = values[i].TotalDeaths;
