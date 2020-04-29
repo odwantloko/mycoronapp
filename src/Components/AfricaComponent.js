@@ -32,20 +32,40 @@ export class AfricaTable extends Component {
 
 
         values = data.Countries;
-        var african_stats= [];
+		let african_stats= [];
+		
 
         // Extract African stats from global stats
         for (let i = 0; i < values.length; i++){
-            delete values[i].Slug;
-            delete values[i].NewConfirmed; 
-			delete values[i].NewDeaths; 
-            delete values[i].NewRecovered; 
-
+			let DeathRatio = (values[i].TotalDeaths/values[i].TotalConfirmed * 100).toFixed(2);
+			let RecoveryRatio = (values[i].TotalRecovered/values[i].TotalConfirmed * 100).toFixed(2);
+			let obj = {};
             for (let j = 0; j < countries.length; j++){
 
                 if(values[i].CountryCode === countries[j].Country_Code){
-                    delete values[i].CountryCode; 
-                    african_stats.push(values[i]);
+					if(RecoveryRatio !=="NaN"){
+						obj.Country = values[i].Country;
+						obj.TotalConfirmed = values[i].TotalConfirmed;
+						obj.TotalDeaths = values[i].TotalDeaths;
+						obj.DeathRatio = DeathRatio + "%";
+						obj.TotalRecovered = values[i].TotalRecovered;
+						obj.RecoveryRatio = RecoveryRatio +"%";
+						obj.Date = new Date(values[i].Date).toLocaleString();
+					
+						
+					}else{
+						obj.Country = values[i].Country;
+						obj.TotalConfirmed = values[i].TotalConfirmed;
+						obj.TotalDeaths = values[i].TotalDeaths;
+						obj.DeathRatio = "0.00%";
+						obj.TotalRecovered = values[i].TotalRecovered;
+						obj.RecoveryRatio ="0.00%";
+						obj.Date = new Date(values[i].Date).toLocaleString();
+					}
+
+				
+                    african_stats.push(obj);
+                 
                 }
              
             }
@@ -65,7 +85,7 @@ export class AfricaTable extends Component {
 	}
 
 	getHeader = () =>{
-		let Header = ['Highest','Country','Total Confirmed','Total Deaths', 'Total Recoveries','Last Updated']
+		let Header = ['Highest','Country','Total Confirmed','Total Deaths','' ,'Total Recoveries','','Last Updated']
 		
 		return Header.map((key, index)=>{
 			return <th key={key}>{key.toUpperCase()}</th>
@@ -107,12 +127,12 @@ const RenderRow = (props) =>{
 	
 	} 
 	
-	else if (index === 2){
+	else if (index === 2 || index === 3){
 		return <td key={props.data[key]} style ={deathRow}>{props.data[key]}</td>	
 
 	} 
 
-	else if(index === 3){
+	else if(index === 4 || index === 5){
 		return <td key={props.data[key]} style ={recoveredRow}>{props.data[key]}</td>	
 
 	}
