@@ -10,6 +10,7 @@ class Visualizer extends Component {
         <h1> The Rona Visualizer</h1>
     <h2> Country  - <b> {this.props.country} </b> Tests Conducted: <b> {this.props.tests}</b></h2>
           <h2> Confirmed Cases : <b style = {confirmed}> {this.props.confirmed} </b> Active Cases : <b>{this.props.active}</b> Recovered Cases : <b  style = {recovered}>{this.props.recovered } </b> Deaths : <b  style = {death}> {this.props.deaths}</b></h2> 
+          <h2 style = {lockdown} > Note: South Africa is currently on <b  style = {confirmed}> LEVEL 4 </b> of the lockdown restrictions  </h2> 
 
           <div style={{ height: '50%', width: '100%' }}>
           <SimpleMap center = { this.props.center}
@@ -36,6 +37,12 @@ const confirmed = {
 const recovered= {
 	color: '#76ff54'
 };
+
+const lockdown= {
+  fontSize: '20px',
+  fontWeight: '200'
+};
+ 
  
 export default Visualizer;
 
