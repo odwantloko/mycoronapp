@@ -21,31 +21,37 @@ class Home extends Component {
   }
   
   componentDidMount = () => {
-
-
     let postOptions = {};
     
     postOptions.method = 'GET';
     
     postOptions.headers = {};
     postOptions.headers['Content-type'] = 'application/json';
-   
-	// Api Call for local stats
-    fetch('https://api.covid19api.com/live/country/south-africa/status/confirmed', postOptions)
-        .then(res => res.json())
-        .then((data) => {
-		this.setState({data:data[data.length-1]})
-		console.log(data[data.length-1])
-
-
-    }).catch(console.log())
 
     // Global Stats API Call
     fetch('https://api.covid19api.com/summary', postOptions)
         .then(res => res.json())
         .then((data) => {
         this.setState({global_data:data.Global})
-        console.log(data.Global)   
+
+        let values = data.Countries;
+        let obj = {};
+        for (let i = 0; i < values.length; i++){
+          if(values[i].CountryCode === 'ZA'){
+              
+              obj.Country = values[i].Country;
+              obj.Confirmed = values[i].TotalConfirmed;
+              obj.Deaths = values[i].TotalDeaths;
+              obj.Recovered = values[i].TotalRecovered;
+              obj.Active = values[i].TotalConfirmed - values[i].TotalDeaths - values[i].TotalRecovered;
+              obj.Date = new Date(values[i].Date).toLocaleString();
+            }
+  
+        }
+
+        this.setState({data:obj});
+
+
         }).catch(console.log)
 
     
@@ -62,7 +68,19 @@ class Home extends Component {
       });
 
 
-  }
+
+
+  //       // Api Call for local stats
+  //   fetch('https://api.covid19api.com/live/country/south-africa/status/confirmed', postOptions)
+  //   .then(res => res.json())
+  //   .then((data) => {
+  // this.setState({data:data[data.length-1]})
+  // console.log(data[data.length-1])
+
+
+// }).catch(console.log())
+
+}
   
  
   render() {
