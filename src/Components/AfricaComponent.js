@@ -15,70 +15,70 @@ export class AfricaTable extends Component {
 
  
 
-  componentDidMount = () => {
+	componentDidMount = () => {
 
-    let postOptions = {};
-    
-    postOptions.method = 'GET';
-    
-    postOptions.headers = {};
-  
-	let values = [{}];
-	let countries = this.state.countries;
+		let postOptions = {};
 		
-    fetch('https://api.covid19api.com/summary', postOptions)
-        .then(res => res.json())
-        .then((data) => {
-
-
-        values = data.Countries;
-		let african_stats= [];
+		postOptions.method = 'GET';
 		
+		postOptions.headers = {};
+	
+		let values = [{}];
+		let countries = this.state.countries;
+			
+		fetch('https://api.covid19api.com/summary', postOptions)
+			.then(res => res.json())
+			.then((data) => {
 
-        // Extract African stats from global stats
-        for (let i = 0; i < values.length; i++){
-			let DeathRatio = (values[i].TotalDeaths/values[i].TotalConfirmed * 100).toFixed(2);
-			let RecoveryRatio = (values[i].TotalRecovered/values[i].TotalConfirmed * 100).toFixed(2);
-			let obj = {};
-            for (let j = 0; j < countries.length; j++){
 
-                if(values[i].CountryCode === countries[j].Country_Code){
-					if(RecoveryRatio !=="NaN"){
-						obj.Country = values[i].Country;
-						obj.TotalConfirmed = values[i].TotalConfirmed;
-						obj.TotalDeaths = values[i].TotalDeaths;
-						obj.DeathRatio = DeathRatio + "%";
-						obj.TotalRecovered = values[i].TotalRecovered;
-						obj.RecoveryRatio = RecoveryRatio +"%";
-						obj.Date = new Date(values[i].Date).toLocaleString();
-					
+			values = data.Countries;
+			let african_stats= [];
+			
+
+			// Extract African stats from global stats
+			for (let i = 0; i < values.length; i++){
+				let DeathRatio = (values[i].TotalDeaths/values[i].TotalConfirmed * 100).toFixed(2);
+				let RecoveryRatio = (values[i].TotalRecovered/values[i].TotalConfirmed * 100).toFixed(2);
+				let obj = {};
+				for (let j = 0; j < countries.length; j++){
+
+					if(values[i].CountryCode === countries[j].Country_Code){
+						if(RecoveryRatio !=="NaN"){
+							obj.Country = values[i].Country;
+							obj.TotalConfirmed = values[i].TotalConfirmed;
+							obj.TotalDeaths = values[i].TotalDeaths;
+							obj.DeathRatio = DeathRatio + "%";
+							obj.TotalRecovered = values[i].TotalRecovered;
+							obj.RecoveryRatio = RecoveryRatio +"%";
+							obj.Date = new Date(values[i].Date).toLocaleString();
 						
-					}else{
-						obj.Country = values[i].Country;
-						obj.TotalConfirmed = values[i].TotalConfirmed;
-						obj.TotalDeaths = values[i].TotalDeaths;
-						obj.DeathRatio = "0.00%";
-						obj.TotalRecovered = values[i].TotalRecovered;
-						obj.RecoveryRatio ="0.00%";
-						obj.Date = new Date(values[i].Date).toLocaleString();
+							
+						}else{
+							obj.Country = values[i].Country;
+							obj.TotalConfirmed = values[i].TotalConfirmed;
+							obj.TotalDeaths = values[i].TotalDeaths;
+							obj.DeathRatio = "0.00%";
+							obj.TotalRecovered = values[i].TotalRecovered;
+							obj.RecoveryRatio ="0.00%";
+							obj.Date = new Date(values[i].Date).toLocaleString();
+						}
+
+					
+						african_stats.push(obj);
+					
 					}
-
 				
-                    african_stats.push(obj);
-                 
-                }
-             
-            }
+				}
 
-        }
+			}
 
-        // sort according to number of cases
-        african_stats.sort( (a,b) => b.TotalConfirmed - a.TotalConfirmed);
-        this.setState({data: african_stats})
-        
-    }).catch(console.log)
-  
-  }
+			// sort according to number of cases
+			african_stats.sort( (a,b) => b.TotalConfirmed - a.TotalConfirmed);
+			this.setState({data: african_stats})
+			
+		}).catch(console.log)
+	
+	}
 
 	getKeys = () =>{
 		return Object.keys(this.state.data[0]);

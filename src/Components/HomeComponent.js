@@ -52,11 +52,10 @@ class Home extends Component {
 
         this.setState({data:obj});
 
-
         }).catch(console.log)
 
     
-      
+      // Firebase call for testcases
       const itemsRef = firebase.database().ref('TestData');
       itemsRef.on('value', (snapshot) => {
         let items = snapshot.val();
@@ -67,20 +66,6 @@ class Home extends Component {
             testData: data
           });
       });
-
-
-
-
-  //       // Api Call for local stats
-  //   fetch('https://api.covid19api.com/live/country/south-africa/status/confirmed', postOptions)
-  //   .then(res => res.json())
-  //   .then((data) => {
-  // this.setState({data:data[data.length-1]})
-  // console.log(data[data.length-1])
-
-
-// }).catch(console.log())
-
 }
   
  

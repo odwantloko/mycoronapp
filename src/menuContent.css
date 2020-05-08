@@ -9,12 +9,12 @@
   .menu-item a {
     display: block;
     padding: .7rem 15px;
-    color: inherit;
+    color: #000;
     text-decoration: none;
   }
   
   .menu-item a:hover {
-    color: inherit;
+    color: #000;
     text-decoration: none;
     background-color: #eee;
   }
@@ -24,7 +24,7 @@
   }
   
   .menu-item a:visited {
-    color: inherit;
+    color: #000;
   }
   
   .active-menu-item {
@@ -34,3 +34,4 @@
   .hint {
     padding: .5rem 15px;
   }
+

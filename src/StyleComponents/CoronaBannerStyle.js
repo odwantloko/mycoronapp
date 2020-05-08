@@ -12,6 +12,10 @@ const CoronaBanner = styled.div`
     font-weight: 150;
    }
 
+   a {
+    color: #17fcfc;
+   }
+
 
   ${breakpoint('tablet')`
 

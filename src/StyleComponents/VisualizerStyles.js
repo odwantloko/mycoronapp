@@ -13,7 +13,7 @@ const VisualizerStyles = styled.div`
    }
 
    h1 {
-       color: #3d3d3d
+       color: #fff;
    }
 
   ${breakpoint('tablet')`
@@ -30,7 +30,7 @@ const VisualizerStyles = styled.div`
 
    
    h1 {
-    color: #3d3d3d
+    color: #fff
 }
 
 `}

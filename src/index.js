@@ -11,10 +11,10 @@ import Home from './Components/HomeComponent'
 import AfricaTable from './Components/AfricaComponent'
 
 
-// const contentStyles = {
-//   fontFamily: 'sans-serif',
-//   textAlign: 'center',
-// }
+const darkMode = {
+  backgroundColor: ' #18191a',
+  color: '#fff'
+};
 
 class App extends Component {
   constructor(props) {
@@ -34,11 +34,12 @@ class App extends Component {
   }
 
   render() {
-    return <div>
+    return <div style={darkMode}>
       <Router>
         <CheeseburgerMenu
           isOpen={this.state.menuOpen}
-          closeCallback={this.closeMenu.bind(this)}>
+          closeCallback={this.closeMenu.bind(this)}
+          style={{backgroundColor:'#000'}}>
           <MenuContent closeCallback={this.closeMenu.bind(this)}/>
         </CheeseburgerMenu>
         
@@ -49,7 +50,7 @@ class App extends Component {
           height={25}
           strokeWidth={3}
           rotate={0}
-          color='black'
+          color='white'
           borderRadius={0}
           animationDuration={0.5}
         />
@@ -74,3 +75,4 @@ class App extends Component {
 }
 
 render(<App />, document.getElementById('root'))
+
