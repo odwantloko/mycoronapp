@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Visualizer from './VisualizerComponent';
 import firebase from './../firebase.js'
+import CoronaBanner from '../StyleComponents/CoronaBannerStyle';
 
 
 class Home extends Component {
@@ -85,25 +86,25 @@ class Home extends Component {
  
   render() {
     return (
-    <div>
       <div>
-        <h4>For more and official COVID-19 information, visit <a href='https://sacoronavirus.co.za'>sacoronavirus.co.za</a>.</h4>
+        <CoronaBanner>
+          <h4>For more and official COVID-19 information, visit <a href='https://sacoronavirus.co.za'>sacoronavirus.co.za</a>.</h4>
+        </CoronaBanner>      
+        {typeof this.state.data.Country !='undefined' ? 
+          <Visualizer
+            country = {this.state.data.Country}
+            tests = {this.state.testData.TestsConducted}
+            active = {this.state.data.Active}
+            confirmed = {this.state.data.Confirmed}
+            recovered = {this.state.data.Recovered}
+            deaths = {this.state.data.Deaths}
+            center = { this.state.center}
+            zoom = {this.state.zoom}
+            global_deaths = {this.state.global_data.TotalDeaths}
+            global_confirmed = {this.state.global_data.TotalConfirmed}
+            global_recovered = {this.state.global_data.TotalRecovered}
+          />: <div> loading .. </div>}
       </div>
-      {typeof this.state.data.Country !='undefined' ? 
-        <Visualizer
-          country = {this.state.data.Country}
-          tests = {this.state.testData.TestsConducted}
-          active = {this.state.data.Active}
-          confirmed = {this.state.data.Confirmed}
-          recovered = {this.state.data.Recovered}
-          deaths = {this.state.data.Deaths}
-          center = { this.state.center}
-          zoom = {this.state.zoom}
-          global_deaths = {this.state.global_data.TotalDeaths}
-          global_confirmed = {this.state.global_data.TotalConfirmed}
-          global_recovered = {this.state.global_data.TotalRecovered}
-        />: <div> loading .. </div>}
-    </div>
      
        
       
