@@ -86,6 +86,9 @@ class Home extends Component {
   render() {
     return (
     <div>
+      <div>
+        <h4>For more and official COVID-19 information, visit <a href='https://sacoronavirus.co.za'>sacoronavirus.co.za</a>.</h4>
+      </div>
       {typeof this.state.data.Country !='undefined' ? 
         <Visualizer
           country = {this.state.data.Country}
